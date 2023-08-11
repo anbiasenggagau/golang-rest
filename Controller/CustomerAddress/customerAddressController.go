@@ -10,8 +10,13 @@ import (
 	"gorm.io/gorm"
 )
 
-type addressResponse struct {
+type AddressResponse struct {
 	Id         int64  `json:"id"`
+	Address    string `json:"address"`
+	CustomerId int64  `json:"customer_id"`
+}
+
+type Request struct {
 	Address    string `json:"address"`
 	CustomerId int64  `json:"customer_id"`
 }
@@ -21,9 +26,9 @@ func GetAll(context *gin.Context) {
 
 	model.Db.Find(&addresses)
 
-	response := make([]addressResponse, 0)
+	response := make([]AddressResponse, 0)
 	for _, item := range addresses {
-		response = append(response, addressResponse{
+		response = append(response, AddressResponse{
 			Id:         item.Id,
 			CustomerId: item.CustomerId,
 			Address:    item.Address,
@@ -48,7 +53,7 @@ func GetAddress(context *gin.Context) {
 		}
 	}
 
-	var response addressResponse = addressResponse{
+	var response AddressResponse = AddressResponse{
 		Id:         address.Id,
 		CustomerId: address.CustomerId,
 		Address:    address.Address,
@@ -72,7 +77,7 @@ func CreateAddress(context *gin.Context) {
 		return
 	}
 
-	var response addressResponse = addressResponse{
+	var response AddressResponse = AddressResponse{
 		Id:         address.Id,
 		CustomerId: address.CustomerId,
 		Address:    address.Address,

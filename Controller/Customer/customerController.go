@@ -10,6 +10,10 @@ import (
 	"gorm.io/gorm"
 )
 
+type Request struct {
+	CustomerName string `json:"customer_name"`
+}
+
 func GetAll(context *gin.Context) {
 	var customers []model.Customer
 

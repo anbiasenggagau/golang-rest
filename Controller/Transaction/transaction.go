@@ -10,7 +10,7 @@ import (
 	"gorm.io/gorm"
 )
 
-type request struct {
+type Request struct {
 	CustomerName  string `json:"customer_name"`
 	ProductName   string `json:"product_name"`
 	PaymentMethod string `json:"payment_method"`
@@ -44,7 +44,7 @@ func GetATransaction(context *gin.Context) {
 }
 
 func CreateTransaction(context *gin.Context) {
-	var req request
+	var req Request
 	var transaction model.Transaction
 	var productsData []model.Product
 	var paymentsData []model.PaymentMethod
